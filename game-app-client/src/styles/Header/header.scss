@@ -1,0 +1,27 @@
+.root
+{
+    border-bottom: 1px solid black;
+    margin-right: 15%;
+    margin-left: 15%;
+    margin-top: 2.5%;
+}
+
+.title
+{
+    max-width: 100px;
+    min-width: 100px !important;
+    max-height: 50px;
+    min-height: 50px;
+}
+.actionContainer
+{
+    margin-left: 50%;
+    
+}
+.actionContainer > button
+{
+ max-width: 100px;
+ min-width: 100px;
+ max-height: 50px;
+ min-height: 50px;
+}
