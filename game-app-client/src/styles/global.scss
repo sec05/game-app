@@ -1,0 +1,25 @@
+.textWithLine {
+    overflow: hidden;
+    text-align: center;
+  }
+  
+  .textWithLine:before,
+  .textWithLine:after {
+    background-color: #000;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+  }
+  
+  .textWithLine:before {
+    right: 0.5em;
+    margin-left: -50%;
+  }
+  
+  .textWithLine:after {
+    left: 0.5em;
+    margin-right: -50%;
+  }

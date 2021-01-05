@@ -5,7 +5,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import "../../../styles/Header/dropdown.scss"
-
+import {useHistory} from "react-router-dom"
 const StyledMenu = withStyles({
 
 })((props) => (
@@ -44,14 +44,16 @@ export default function Dropdown() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const History = useHistory();
+  const changeURL = (url) =>
+  {
+    History.push(url);
+  }
   return (
     <div style={{display: "inline"}}>
       <Button
         aria-controls="customized-menu"
         aria-haspopup="true"
-        variant="contained"
-        color="primary"
         onClick={handleClick}
         className="dropdownButton"
       >
@@ -66,10 +68,10 @@ export default function Dropdown() {
       >
         <StyledMenuItem>
           
-          <ListItemText primary="Log In" />
+          <ListItemText onClick={()=>changeURL("/login")}>Log In</ListItemText>
         </StyledMenuItem>
         <StyledMenuItem>
-          <ListItemText primary="Create Account" />
+        <ListItemText onClick={()=>changeURL("/signup")}>Create Account</ListItemText>
         </StyledMenuItem>
       </StyledMenu>
     </div>

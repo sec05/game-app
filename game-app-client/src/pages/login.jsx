@@ -4,6 +4,8 @@ import { Button } from "@material-ui/core";
 import { TextField } from "formik-material-ui";
 import * as Yup from "yup";
 import "../styles/login.scss";
+import GitHubIcon from '@material-ui/icons/GitHub';
+import "../styles/global.scss";
 export default function login() {
   const loginSchema = Yup.object().shape({
     Username: Yup.string()
@@ -58,6 +60,7 @@ export default function login() {
                 color="primary"
                 disabled={isSubmitting}
                 onClick={submitForm}
+                size="large"
               >
                 Submit
               </Button>
@@ -65,6 +68,8 @@ export default function login() {
           </div>
         )}
       </Formik>
+      <h2 className="textWithLine">Or Login With</h2>
+          <Button className="githubButton" size="large"><GitHubIcon fontSize="medium"/> &nbsp;GitHub</Button>
     </div>
   );
 }

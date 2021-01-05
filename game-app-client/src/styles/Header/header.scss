@@ -1,6 +1,5 @@
 .root
 {
-    border-bottom: 1px solid black;
     margin-right: 15%;
     margin-left: 15%;
     margin-top: 2.5%;
@@ -15,7 +14,8 @@
 }
 .actionContainer
 {
-    margin-left: 50%;
+    margin-left: auto;
+    order: 2;
     
 }
 .actionContainer > button

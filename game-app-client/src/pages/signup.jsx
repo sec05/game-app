@@ -75,6 +75,7 @@ export default function signup() {
                 color="primary"
                 disabled={isSubmitting}
                 onClick={submitForm}
+                size="large"
               >
                 Submit
               </Button>
