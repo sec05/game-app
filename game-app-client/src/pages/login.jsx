@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import "../styles/login.scss";
 import GitHubIcon from '@material-ui/icons/GitHub';
 import "../styles/global.scss";
-export default function login() {
+export default function Login() {
   const loginSchema = Yup.object().shape({
     Username: Yup.string()
       .min(2, "Must Be Greater Than 2 Characters")
@@ -69,7 +69,7 @@ export default function login() {
         )}
       </Formik>
       <h2 className="textWithLine">Or Login With</h2>
-          <Button className="githubButton" size="large"><GitHubIcon fontSize="medium"/> &nbsp;GitHub</Button>
+          <Button className="githubButton" onClick={()=>window.location.href="http://localhost:3001/auth/github "} size="large"><GitHubIcon fontSize="medium"/> &nbsp;GitHub</Button>
     </div>
   );
 }

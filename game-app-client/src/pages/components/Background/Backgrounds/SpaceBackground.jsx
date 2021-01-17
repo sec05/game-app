@@ -17,7 +17,7 @@ export default function SpaceBackground() {
         const canvas = new GameCanvas("bkg")
         const drawOnCanvas = () =>
         {
-            canvas.addDrawing(
+           /* canvas.addDrawing(
                 function ({ctx, elapsed, width, height}) {
                     let x = (100 * elapsed/1000) % width;
                     let y = height/2
@@ -26,7 +26,7 @@ export default function SpaceBackground() {
                     ctx.stroke();
                     console.log(width, height)
                 });
-                canvas.run();
+                canvas.run();*/
         }
         drawOnCanvas();
         window.addEventListener("resize",updateCanvasSize,false);

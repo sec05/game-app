@@ -66,12 +66,12 @@ export default function Dropdown() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
+        <StyledMenuItem onClick={()=>changeURL("/login")}>
           
-          <ListItemText onClick={()=>changeURL("/login")}>Log In</ListItemText>
+          <ListItemText >Log In</ListItemText>
         </StyledMenuItem>
-        <StyledMenuItem>
-        <ListItemText onClick={()=>changeURL("/signup")}>Create Account</ListItemText>
+        <StyledMenuItem onClick={()=>changeURL("/signup")}>
+        <ListItemText >Create Account</ListItemText>
         </StyledMenuItem>
       </StyledMenu>
     </div>
