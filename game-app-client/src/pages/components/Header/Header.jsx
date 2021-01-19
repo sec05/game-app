@@ -34,7 +34,7 @@ export default function Header() {
             Title
           </Button>
             <div className="actionContainer">
-                <Button>Games</Button>
+                <Button onClick={()=>changeURL("/games")}>Games</Button>
                 <Button>Button</Button>
                 <Button onClick={handleClickOpen}>Log In</Button>
             </div>
