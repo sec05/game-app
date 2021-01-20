@@ -21,7 +21,8 @@ import { __prod__ } from "./constants";
     callbackURL: "http://localhost:3001/auth/github/callback"
   },
   function(_, __, profile, cb) {
-   cb(null, {accessToken: jwt.sign({userID: "bob"}, process.env.ACCESS_TOKEN_SECRET!,{ expiresIn: "1y"})
+    //console.log(profile);
+   cb(null, {accessToken: jwt.sign({userID: profile.username}, process.env.ACCESS_TOKEN_SECRET!,{ expiresIn: "12h"})
   })}
 ));
   app.get('/auth/github',

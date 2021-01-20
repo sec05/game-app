@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GameCanvas, Sprite } from "../../../../helpers/SimpleCanvasLibrary.js";
 import { spaceshipSprite } from "../../../../assets/spaceshipSprite.js";
 export default function SpaceBackground() {
-  const canvasRef = useRef(null);
   const [canvasWidth, updateCanvasWidth] = useState(window.innerWidth);
   const [canvasHeight, updateCanvasHeight] = useState(window.innerHeight);
 
@@ -10,9 +9,11 @@ export default function SpaceBackground() {
     updateCanvasWidth(window.innerWidth);
     updateCanvasHeight(window.innerHeight);
   };
-
   useEffect(() => {
     const canvas = new GameCanvas("bkg");
+    let sx = Math.round(Math.random()*(window.innerWidth)-310);
+    let sy = Math.round(Math.random()*(window.innerHeight)-330);
+    
     const drawOnCanvas = () => {
       const spaceShip = new Sprite({
         src: spaceshipSprite,
@@ -22,15 +23,41 @@ export default function SpaceBackground() {
         y: 100,
         targetHeight: 82.5,
         targetWidth: 77.5,
-        frame: 0,
+        frame: 1,
         frameRate: 0,
-        angle: 2*Math.PI/9,
+        angle: 0,
     update({sprite, stepTime}){
-      sprite.angle +=1*stepTime/500 
-     
+     // sprite.angle +=1*stepTime/500 
+      sprite.x+=(sx-sprite.x)*stepTime/800;
+      sprite.y+=(sy-sprite.y)*stepTime/800;
+      
+      if(Math.round(sprite.x)===sx)
+      {
+        sx = Math.round(Math.random()*(window.innerWidth))-510;
+        sy = Math.round(Math.random()*(window.innerHeight))-530;
+        if(sx<=-1)
+        {
+          sx=sx*-1;
+        }
+        if(sy<=-1)
+        {
+          sy=sy*-1;
+        }
+      }
     },
 });
-
+canvas.addDrawing(
+      function ({ctx, elapsed, width, height}) {
+          let x = spaceShip.x;
+          let y = spaceShip.y;
+          let borderWidth=2;
+          ctx.beginPath();
+          ctx.fillStyle = "red"
+          ctx.fillRect( x - borderWidth, y -borderWidth, 86.5 , 81.5);
+          ctx.fillStyle = "white"
+          ctx.fillRect(x,y,82.5,77.5);
+          ctx.stroke();
+      });
       canvas.addDrawing(spaceShip);
 
       canvas.run();
@@ -42,7 +69,6 @@ export default function SpaceBackground() {
     <div>
       <canvas
         id="bkg"
-        ref={canvasRef}
         width={canvasWidth}
         height={canvasHeight}
       />
