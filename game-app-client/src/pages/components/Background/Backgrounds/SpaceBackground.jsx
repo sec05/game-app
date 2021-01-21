@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GameCanvas, Sprite } from "../../../../helpers/SimpleCanvasLibrary.js";
-import { spaceshipSprite } from "../../../../assets/spaceshipSprite.js";
+import  {spaceshipSprite}  from "../../../../assets/spaceshipSprite.js";
+import {earthPng} from "../../../../assets/earthPng.js";
 export default function SpaceBackground() {
   const [canvasWidth, updateCanvasWidth] = useState(window.innerWidth);
   const [canvasHeight, updateCanvasHeight] = useState(window.innerHeight);
@@ -57,6 +58,9 @@ canvas.addDrawing(
           ctx.fillStyle = "white"
           ctx.fillRect(x,y,82.5,77.5);
           ctx.stroke();
+          const earthImg = new Image();
+          earthImg.src = earthPng;
+          ctx.drawImage(earthImg,100,100,100,106);
       });
       canvas.addDrawing(spaceShip);
 
