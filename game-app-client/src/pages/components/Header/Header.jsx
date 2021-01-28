@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from "@material-ui/core/Button";
@@ -10,6 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import "../../../styles/Header/header.scss"
 import {useHistory} from "react-router-dom"
+import axios from "axios"
 export default function Header() {
 
   const History = useHistory();
@@ -26,6 +27,9 @@ export default function Header() {
   const handleClose = () => {
     setOpen(false);
   };
+  useEffect(()=>{
+    axios.get("http://localhost:3001/auth/userdata", {withCredentials: true }).then(res=>console.log(res));
+  },[])
   return (
     <div className="root">
       <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none'}}>
@@ -36,7 +40,7 @@ export default function Header() {
             <div className="actionContainer">
                 <Button onClick={()=>changeURL("/games")}>Games</Button>
                 <Button>Button</Button>
-                <Button onClick={handleClickOpen}>Log In</Button>
+                <Button onClick={handleClickOpen}>Log In{document.cookie}</Button>
             </div>
 
         </Toolbar>
