@@ -11,7 +11,16 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import "../../../styles/Header/header.scss"
 import {useHistory} from "react-router-dom"
 import axios from "axios"
+import { makeStyles } from '@material-ui/core';
+const useStyles = makeStyles((theme) => ({
+  headerButton: {
+  
+    color: "White",
+    //background: theme.palette.main,
+  }
+}));
 export default function Header() {
+  const classes = useStyles();
 
   const History = useHistory();
   const changeURL = (url) =>
@@ -34,13 +43,16 @@ export default function Header() {
     <div className="root">
       <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none'}}>
         <Toolbar>
-          <Button size="large" className="title" onClick={()=>changeURL("/")}>
+          {/*eslint-disable-next-line*/}
+               <Button size="large" color="white" className="title" className={classes.headerButton} onClick={()=>changeURL("/")}>
             Title
           </Button>
+
+       
             <div className="actionContainer">
-                <Button onClick={()=>changeURL("/games")}>Games</Button>
-                <Button>Button</Button>
-                <Button onClick={handleClickOpen}>Log In{document.cookie}</Button>
+                <Button  className={classes.headerButton} onClick={()=>changeURL("/games")}>Games</Button>
+                <Button className={classes.headerButton}>Button</Button>
+                <Button  className={classes.headerButton} onClick={handleClickOpen}>Log In{document.cookie}</Button>
             </div>
 
         </Toolbar>

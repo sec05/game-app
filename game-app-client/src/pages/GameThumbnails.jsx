@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Thumbnail from "./components/Games/Thumbnail.jsx";
 import "../styles/Games/Games.scss";
-export default function Games() {
+export default function GameThumbnails() {
   const [page, changePage] = useState(0);
   let ThumbnailRow1 = [1, 2, 3];
   let ThumbnailRow2 = [4, 5, 6];
