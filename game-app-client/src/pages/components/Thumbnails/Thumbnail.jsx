@@ -10,7 +10,8 @@ export default function Thumbnail(props) {
       <animated.div
         onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(window.innerWidth/2, y) })}
         onMouseLeave={() => set({ xys: [0, 0, 1] })}
-        style={{ transform: pos.xys.interpolate(trans), width: "19vw", height: "10vw", border: "1px solid red"}}
+        style={{ transform: pos.xys.interpolate(trans)}}
+        className="thumbnail"
     >
       {props.number}
       </animated.div>)

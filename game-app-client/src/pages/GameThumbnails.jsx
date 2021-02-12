@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import Thumbnail from "./components/Games/Thumbnail.jsx";
+import Thumbnail from "./components/Thumbnails/Thumbnail.jsx";
 import "../styles/Games/Games.scss";
 export default function GameThumbnails() {
   const [page, changePage] = useState(0);
