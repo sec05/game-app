@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { GameCanvas, Sprite } from "../../../../helpers/SimpleCanvasLibrary.js";
 import  {spaceshipSprite}  from "../../../../assets/spaceshipSprite.js";
-import {earthPng} from "../../../../assets/earthPng.js";
+import {planet1, planet2, planet3, planet4} from "../../../../assets/planets.js";
+import {redStar, blueStar, greyStar} from "../../../../assets/stars.js"
+
 export default function SpaceBackground() {
   const [canvasWidth, updateCanvasWidth] = useState(window.innerWidth);
   const [canvasHeight, updateCanvasHeight] = useState(window.innerHeight);
@@ -10,7 +12,23 @@ export default function SpaceBackground() {
     updateCanvasWidth(window.innerWidth);
     updateCanvasHeight(window.innerHeight);
   };
+  let starCoords = [];
+    for(let i = 0; i <= 40; i++)
+    {
+      starCoords.push([Math.random()*window.innerWidth,Math.random()*window.innerHeight]);
+    }
+    let star = [];
+    for(let i =0; i<=40; i++)
+    {
+      star.push(Math.round(2*Math.random()));
+    }
+    let planetCoords = [];
+    for(let i = 0; i <= 3; i++)
+    {
+      planetCoords.push([Math.random()*window.innerWidth,Math.random()*window.innerHeight])
+    }
   useEffect(() => {
+    
     const canvas = new GameCanvas("bkg");
     let sx = Math.round(Math.random()*(window.innerWidth)-310);
     let sy = Math.round(Math.random()*(window.innerHeight)-330);
@@ -49,26 +67,48 @@ export default function SpaceBackground() {
 });
 canvas.addDrawing(
       function ({ctx, elapsed, width, height}) {
-          let x = spaceShip.x;
+        const blueStarImg = new Image();
+        blueStarImg.src = blueStar;
+        const redStarImg = new Image();
+        redStarImg.src = redStar;
+        const greyStarImg = new Image();
+        greyStarImg.src = greyStar;
+        let stars = [blueStarImg, greyStarImg, redStarImg]
+        starCoords.map((coord, index)=>{
+            
+            ctx.drawImage(stars[star[index]], coord[0], coord[1], 15, 15);
+            return index;
+        })
+         /*  let x = spaceShip.x;
           let y = spaceShip.y;
           let borderWidth=2;
-          ctx.beginPath();
+         ctx.beginPath();
           ctx.fillStyle = "red"
           ctx.fillRect( x - borderWidth, y -borderWidth, 86.5 , 81.5);
           ctx.fillStyle = "white"
           ctx.fillRect(x,y,82.5,77.5);
-          ctx.stroke();
-          const earthImg = new Image();
-          earthImg.src = earthPng;
-          ctx.drawImage(earthImg,100,100,100,106);
+          ctx.stroke();*/
+          const planet1Png = new Image();
+          planet1Png.src = planet1;
+         const planet2Png = new Image();
+         planet2Png.src = planet2;
+         const planet3Png = new Image();
+         planet3Png.src = planet3;
+         const planet4Png = new Image();
+         planet4Png.src = planet4;
+        let planets = [planet1Png, planet2Png, planet3Png, planet4Png]
+          planetCoords.map((coord, index)=>{
+            ctx.drawImage(planets[index], coord[0], coord[1], 100,100);
+            return index;
+          })
       });
       canvas.addDrawing(spaceShip);
 
       canvas.run();
     };
     drawOnCanvas();
-    window.addEventListener("resize", updateCanvasSize, false);
-  }, []);
+    window.addEventListener("resize", updateCanvasSize())
+  });
   return (
     <div>
       <canvas
