@@ -1,40 +1,65 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import Thumbnail from "./components/Thumbnails/Thumbnail.jsx";
-import "../styles/Games/Games.scss";
+import IconButton from "@material-ui/core/IconButton";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import "../styles/Games/GameThumbnails.scss";
 export default function GameThumbnails() {
   const [page, changePage] = useState(0);
   let ThumbnailRow1 = [1, 2, 3];
   let ThumbnailRow2 = [4, 5, 6];
   const renderThumbnails = () => {
     const renderingThumbnailsRow1 = ThumbnailRow1.map((nail, index) => {
-      return <td align="center" key={nail}><Thumbnail  number={nail + page} /></td>;
+      return (
+        <td align="center" key={nail}>
+          <Thumbnail number={nail + page} />
+        </td>
+      );
     });
-    ReactDOM.render(renderingThumbnailsRow1, document.getElementById("topRow"))
+    ReactDOM.render(renderingThumbnailsRow1, document.getElementById("topRow"));
     const renderingThumbnailsRow2 = ThumbnailRow2.map((nail, index) => {
-        return <td align="center" key={nail}><Thumbnail  number={nail +page} /></td>;
-      });
-    ReactDOM.render(renderingThumbnailsRow2, document.getElementById("bottomRow"))
+      return (
+        <td align="center" key={nail}>
+          <Thumbnail number={nail + page} />
+        </td>
+      );
+    });
+    ReactDOM.render(
+      renderingThumbnailsRow2,
+      document.getElementById("bottomRow")
+    );
   };
-  
+  const arrowClick = (dir) => {
+    if(page>=0 && dir===1)
+    {
+      changePage(page + 6 * dir);
+    }
+    if(page>0 && dir===-1)
+    {
+      changePage(page + 6 * dir);
+    }
+    
+  };
   useEffect(() => {
     renderThumbnails();
   });
   return (
     <div className="gamesContainer">
-      <table style={{width: "100%" }}>
+      <table style={{ width: "100%" }}>
         <tbody>
-          <tr id="topRow" className="gamesTableRow">
-               
-        </tr>
-        <tr id="bottomRow">
-
-        </tr>
+          <tr id="topRow" className="thumbnailRow"></tr>
+          <tr id="bottomRow" className="thumbnailRow"></tr>
         </tbody>
-        
       </table>
-      <button onClick={()=>changePage(page+1)}>New Page</button>
-      <button onClick={()=>changePage(page-1)}>Previous Page</button>
+      <div className="arrowButtonsContainer">
+        <IconButton onClick={() => arrowClick(-1)}>
+          <ArrowBackIcon style={{ color: "white", fontSize: "2.5vw" }} />
+        </IconButton>
+        <IconButton onClick={() => arrowClick(1)}>
+          <ArrowForwardIcon style={{ color: "white", fontSize: "2.5vw" }} />
+        </IconButton>
+      </div>
     </div>
   );
 }

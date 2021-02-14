@@ -28,7 +28,8 @@ export default function Header() {
     History.push(url);
   }
   const [open, setOpen] = React.useState(false);
-
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [username, setUsername] = React.useState(null);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -37,7 +38,21 @@ export default function Header() {
     setOpen(false);
   };
   useEffect(()=>{
-    axios.get("http://localhost:3001/auth/userdata", {withCredentials: true }).then(res=>console.log(res));
+    axios.get("http://localhost:3001/auth/userdata", {withCredentials: true }).then(
+      res=>
+      {
+        if(res.data.user === null)
+        {
+          setLoggedIn(false);
+        }
+        else
+        {
+        setUsername(res.data.user);
+        setLoggedIn(true);
+        }
+        
+      }
+      );
   },[])
   return (
     <div className="root">
@@ -51,8 +66,11 @@ export default function Header() {
        
             <div className="actionContainer">
                 <Button  className={classes.headerButton} onClick={()=>changeURL("/games")}>Games</Button>
-                <Button className={classes.headerButton}>Button</Button>
-                <Button  className={classes.headerButton} onClick={handleClickOpen}>Log In{document.cookie}</Button>
+                <Button className={classes.headerButton}>Button</Button> 
+                {loggedIn===false && <Button  className={classes.headerButton} onClick={handleClickOpen}>Log In</Button>}
+                {loggedIn===true && <Button  className={classes.headerButton}>{username}</Button>}
+               
+             
             </div>
 
         </Toolbar>
