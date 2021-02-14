@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from "@material-ui/core/Button";
@@ -10,8 +10,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import GitHubIcon from '@material-ui/icons/GitHub';
 import "../../../styles/Header/header.scss"
 import {useHistory} from "react-router-dom"
-import axios from "axios"
 import { makeStyles } from '@material-ui/core';
+import useUserStats from "../../../hooks/useUserStats"
 const useStyles = makeStyles((theme) => ({
   headerButton: {
   
@@ -21,15 +21,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Header() {
   const classes = useStyles();
-
+  const { status, data, error, isFetching } = useUserStats();
   const History = useHistory();
   const changeURL = (url) =>
   {
     History.push(url);
   }
   const [open, setOpen] = React.useState(false);
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  const [username, setUsername] = React.useState(null);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -37,23 +35,7 @@ export default function Header() {
   const handleClose = () => {
     setOpen(false);
   };
-  useEffect(()=>{
-    axios.get("http://localhost:3001/auth/userdata", {withCredentials: true }).then(
-      res=>
-      {
-        if(res.data.user === null)
-        {
-          setLoggedIn(false);
-        }
-        else
-        {
-        setUsername(res.data.user);
-        setLoggedIn(true);
-        }
-        
-      }
-      );
-  },[])
+  
   return (
     <div className="root">
       <AppBar position="static" style={{ background: 'transparent', boxShadow: 'none'}}>
@@ -66,11 +48,9 @@ export default function Header() {
        
             <div className="actionContainer">
                 <Button  className={classes.headerButton} onClick={()=>changeURL("/games")}>Games</Button>
-                <Button className={classes.headerButton}>Button</Button> 
-                {loggedIn===false && <Button  className={classes.headerButton} onClick={handleClickOpen}>Log In</Button>}
-                {loggedIn===true && <Button  className={classes.headerButton}>{username}</Button>}
-               
-             
+                {isFetching &&<Button  className={classes.headerButton} onClick={handleClickOpen}>Log In</Button>}
+                {isFetching === false && data.user === null &&<Button  className={classes.headerButton} onClick={handleClickOpen}>Log In</Button>}
+                {isFetching === false && data.user !== null && <Button  className={classes.headerButton}>{data.user}</Button>}
             </div>
 
         </Toolbar>

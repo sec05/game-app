@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { GameCanvas, Sprite } from "../../../../helpers/SimpleCanvasLibrary.js";
+import { GameCanvas, Sprite } from "../../../../assets/SimpleCanvasLibrary.js";
 import  {spaceshipSprite}  from "../../../../assets/spaceshipSprite.js";
 import {planet1, planet2, planet3, planet4} from "../../../../assets/planets.js";
 import {redStar, blueStar, greyStar} from "../../../../assets/stars.js"
