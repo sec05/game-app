@@ -50,7 +50,7 @@ export default function Header() {
                 <Button  className={classes.headerButton} onClick={()=>changeURL("/games")}>Games</Button>
                 {isFetching &&<Button  className={classes.headerButton} onClick={handleClickOpen}>Log In</Button>}
                 {isFetching === false && data.user === null &&<Button  className={classes.headerButton} onClick={handleClickOpen}>Log In</Button>}
-                {isFetching === false && data.user !== null && <Button  className={classes.headerButton}>{data.user}</Button>}
+                {isFetching === false && data.user !== null && <Button  className={classes.headerButton}>{data.user}<img className="profilePicture" src={data.photos}/></Button>}
             </div>
 
         </Toolbar>

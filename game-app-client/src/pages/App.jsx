@@ -8,6 +8,7 @@ import "../styles/app.scss"
 import Header from "./components/Header/Header.jsx";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import Profile from "./Profile.jsx"
 function App() {
   const queryClient = new QueryClient();
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" exact component={index}/>
           <Route path="/games" exact component={GameThumbnails}/>
           <Route path="/games/1" exact component={planetGuesser}/>
+          <Route path="/profile" exact component={Profile}/>
           <Route path="/" component={unknown}/>
         </Switch>
       )}/>
